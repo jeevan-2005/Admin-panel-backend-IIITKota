@@ -2,8 +2,8 @@ import dotenv from "dotenv";
 dotenv.config();
 import express from "express";
 import cors from "cors";
-// import cookieParser from "cookie-parser";
 import errorMiddleware from "./middlewares/error.middleware.js";
+import userRouter from "./routes/user.routes.js";
 
 export const app = express();
 
@@ -14,7 +14,9 @@ app.use(
     credentials: true,
   })
 );
-// app.use(cookieParser());
+
+// routes
+app.use("/api/v1/user", userRouter);
 
 app.get("/health-check", (req, res, next) => {
   res.status(200).json({

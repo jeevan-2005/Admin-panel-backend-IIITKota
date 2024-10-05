@@ -4,6 +4,7 @@ import express from "express";
 import cors from "cors";
 import errorMiddleware from "./middlewares/error.middleware.js";
 import userRouter from "./routes/user.routes.js";
+import cookieParser from "cookie-parser";
 
 export const app = express();
 
@@ -14,6 +15,7 @@ app.use(
     credentials: true,
   })
 );
+app.use(cookieParser());
 
 // routes
 app.use("/api/v1/user", userRouter);

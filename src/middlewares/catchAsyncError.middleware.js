@@ -1,4 +1,4 @@
-import ErrorHandler from "../utils/ErrorHandler";
+import ErrorHandler from "../utils/ErrorHandler.js";
 
 const catchAsyncError = (fn) => async (req, res, next) => {
   try {

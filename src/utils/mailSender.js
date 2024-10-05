@@ -3,6 +3,10 @@ dotenv.config();
 import nodemailer from "nodemailer";
 import path from "path";
 import ejs from "ejs";
+import { fileURLToPath } from "url";
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 const sendMail = async (options) => {
   const transporter = nodemailer.createTransport({

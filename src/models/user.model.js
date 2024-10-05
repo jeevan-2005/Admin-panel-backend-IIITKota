@@ -49,7 +49,7 @@ userSchema.methods.matchPassword = async function (enteredPassword) {
 };
 
 userSchema.methods.signAccessToken = function(){
-    return jwt.sign({id: this._id}, process.env.ACCESS_TOKEN_SECRET, {expiresIn: "1d"});
+    return jwt.sign({id: this._id}, process.env.ACCESS_TOKEN_SECRET, {expiresIn: "15m"});
 }
 
 userSchema.methods.signRefreshToken = function(){

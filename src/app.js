@@ -5,6 +5,7 @@ import cors from "cors";
 import errorMiddleware from "./middlewares/error.middleware.js";
 import userRouter from "./routes/user.routes.js";
 import cookieParser from "cookie-parser";
+import announcementRouter from "./routes/announcement.routes.js";
 
 export const app = express();
 
@@ -19,6 +20,7 @@ app.use(cookieParser());
 
 // routes
 app.use("/api/v1/user", userRouter);
+app.use("/api/v1/announcement", announcementRouter);
 
 app.get("/health-check", (req, res, next) => {
   res.status(200).json({

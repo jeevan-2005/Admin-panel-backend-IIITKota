@@ -6,6 +6,7 @@ import errorMiddleware from "./middlewares/error.middleware.js";
 import userRouter from "./routes/user.routes.js";
 import cookieParser from "cookie-parser";
 import announcementRouter from "./routes/announcement.routes.js";
+import eventRouter from "./routes/events.routes.js";
 
 export const app = express();
 
@@ -21,6 +22,7 @@ app.use(cookieParser());
 // routes
 app.use("/api/v1/user", userRouter);
 app.use("/api/v1/announcement", announcementRouter);
+app.use("/api/v1/event", eventRouter);
 
 app.get("/health-check", (req, res, next) => {
   res.status(200).json({
@@ -32,7 +34,7 @@ app.get("/health-check", (req, res, next) => {
 app.all("*", (req, res, next) => {
   const error = new Error(`Route ${req.originalUrl} not found!`);
   error.status = 404;
-  next(err);
+  next(error);
 });
 
 app.use(errorMiddleware);

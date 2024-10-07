@@ -4,25 +4,28 @@ import {
   deleteAnnouncement,
   getAnnouncements,
   updateAnnouncement,
-} from "../controllers/announcement.controller";
-import { isAuth } from "../middlewares/auth.middleware";
+} from "../controllers/announcement.controller.js";
+import { authorizeRoles, isAuth } from "../middlewares/auth.middleware.js";
 
 const announcementRouter = express.Router();
 
-announcementRouter.get("/announcements", getAnnouncements);
+announcementRouter.get("/", isAuth, getAnnouncements);
 announcementRouter.post(
-  "/create-announcement",
-  isAuth("admin", "superAdmin"),
+  "/create",
+  isAuth,
+  authorizeRoles("admin", "superAdmin"),
   createAnnouncement
 );
 announcementRouter.put(
-  "/update-announcement",
-  isAuth("admin", "superAdmin"),
+  "/update/:id",
+  isAuth,
+  authorizeRoles("admin", "superAdmin"),
   updateAnnouncement
 );
 announcementRouter.delete(
-  "/delete-announcement",
-  isAuth("admin", "superAdmin"),
+  "/delete/:id",
+  isAuth,
+  authorizeRoles("admin", "superAdmin"),
   deleteAnnouncement
 );
 

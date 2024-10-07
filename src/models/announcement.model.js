@@ -13,7 +13,7 @@ const announcementSchema = new mongoose.Schema(
       default: "",
     },
     date: {
-      type: Date,
+      type: String,
       required: true,
       validate: {
         validator: function (value) {

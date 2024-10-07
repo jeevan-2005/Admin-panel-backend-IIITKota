@@ -27,6 +27,7 @@ const createAnnouncement = catchAsyncError(async (req, res, next) => {
 
     return res.status(201).json({
       success: true,
+      message: "Announcement created successfully", 
       announcement,
     });
   } catch (error) {
@@ -37,21 +38,26 @@ const createAnnouncement = catchAsyncError(async (req, res, next) => {
 const updateAnnouncement = catchAsyncError(async (req, res, next) => {
   try {
     const { id } = req.params;
-    const announcement = await AnnouncementModel.findById(id);
-    if (!announcement) {
-      return next(new ErrorHandler("Announcement not found", 404));
-    }
+    const { title, description, date, link } = req.body;
 
     const updatedAnnouncement = await AnnouncementModel.findByIdAndUpdate(
       id,
-      req.body,
       {
-        new: true,
-      }
+        title,
+        description,
+        date,
+        link,
+      },
+      { new: true, runValidators: true }
     );
+
+    if (!updatedAnnouncement) {
+      return next(new ErrorHandler("Announcement not found", 404));
+    }
 
     return res.status(200).json({
       success: true,
+      message: "Announcement updated successfully",
       updatedAnnouncement,
     });
   } catch (error) {
@@ -68,6 +74,7 @@ const deleteAnnouncement = catchAsyncError(async (req, res, next) => {
     }
     return res.status(200).json({
       success: true,
+      message: "Announcement deleted successfully",
       announcement,
     });
   } catch (error) {

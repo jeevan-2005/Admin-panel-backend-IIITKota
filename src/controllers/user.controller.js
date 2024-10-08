@@ -21,12 +21,18 @@ const registerUser = catchAsyncError(async (req, res, next) => {
       return next(new ErrorHandler("User already exists", 400));
     }
 
-    const user = {
+    const user = new UserModel({
       name,
       email,
       password,
       role,
-    };
+    });
+
+    try {
+      await user.validate();
+    } catch (validationError) {
+      return next(new ErrorHandler(validationError.message, 400));
+    }
 
     const { activationCode, activationToken } =
       createActivationCredentials(user);

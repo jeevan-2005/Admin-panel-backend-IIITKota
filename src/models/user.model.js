@@ -17,7 +17,7 @@ const userSchema = new mongoose.Schema(
         validator: function (value) {
           return emailRegexPattern.test(value);
         },
-        message: "Please enter a valid email address",
+        message: props => `${props.value} is not a valid email address! Please enter email address ending with @iiitkota.ac.in`,
       },
       unique: true,
     },

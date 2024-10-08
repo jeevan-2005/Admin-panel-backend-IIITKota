@@ -24,6 +24,7 @@ This project is an Express.js-based backend that provides core functionalities f
 
 - **Node.js**
 - **Express.js**
+- **MongoDB** (for database management)
 - **bcrypt** (for password hashing)
 - **JWT** (for user authentication)
 - **nodemailer** (for email-based 2FA)
